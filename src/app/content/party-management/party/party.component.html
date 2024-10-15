@@ -1,0 +1,88 @@
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-12 center-table-container">
+    <h2>Party Data</h2>
+    <button type="button" class="btn btn-primary" routerLink="/add-party">Add Detail</button>
+    <table class="mt-3 m-0 table table-bordered order-column">
+      <thead>
+        <tr>
+          <th id="#">S.No</th>
+          <th id="#">Name</th>
+          <th id="#">Company Name</th>
+          <th id="#">Mobile Number</th>
+          <th id="#">Telephone Number</th>
+          <th id="#">Whatsapp Number</th>
+          <th id="#">Email</th>
+          <th id="#">Remark</th>
+          <th id="#">Login Access</th>
+          <th id="#">Date of Birth</th>
+          <th id="#">Anniversary Date</th>
+          <th id="#">Gstin</th>
+          <th id="#">Pan number</th>
+          <th id="#">Apply TDS</th>
+          <th id="#">Credit Limit</th>
+          <th id="#">Address</th>
+          <th id="#">Bank</th>
+          <th id="#">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="" *ngFor="let user of data; let i = index;">
+            
+          <td>{{i+1}}</td>
+          <td>{{user.name || 'NA'}}</td>
+          <td>{{user.company_name || 'NA'}}</td>
+          <td>{{user.mobile_no || 'NA'}}</td>
+          <td>{{user.telephone_no || 'NA'}}</td>
+          <td>{{user.whatsapp_no || 'NA'}}</td>
+          <td>{{user.email || 'NA'}}</td>
+          <td>{{user.remark || 'NA'}}</td>
+          <td>{{user.login_access || 'NA'}}</td>
+
+          <td>{{user.date_of_birth || 'NA'}}</td>
+          <td>{{user.anniversary_date || 'NA'}}</td>
+          <td>{{user.gstin || 'NA'}}</td>
+          <td>{{user.pan_no || 'NA'}}</td>
+          <td>{{user.apply_tds || 'NA'}}</td>
+          <td>{{user.credit_limit || 'NA'}}</td>
+          <td>
+            <div *ngIf="checkArray(user.address); else addressBlock">NA</div>
+            <ng-template #addressBlock>
+              <ul>
+                <li *ngFor="let address of user.address">
+                  {{ formatAddress(address) }}
+                </li>
+              </ul>
+            </ng-template>
+          </td>
+          <td>
+            <div *ngIf="checkArray(user.bank_id); else bankBlock">NA</div>
+            <ng-template #bankBlock>
+              <ul>
+                <li *ngFor="let bank of user.bank_id">
+                  {{ checkValue(bank.bank_name) }}, {{ checkValue(bank.branch_name) }}, {{ checkValue(bank.account_no) }}, {{ checkValue(bank.bank_ifsc_code) }}, {{ checkValue(bank.account_holder_name) }}
+                </li>
+              </ul>
+            </ng-template>
+          </td>
+        
+        <td class="action">
+            <button (click)="editItem(user.id)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="deleteItem(user.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="noData">
+          <td class="text-center" [attr.colspan]=19>
+            No Record available
+          </td>
+        </tr>
+      
+      </tbody>
+    </table>
+    </div>
+    </div>
+  </div>

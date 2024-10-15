@@ -1,0 +1,50 @@
+<div class="onboarding">
+    <div class="left">
+        <div class="left-wrapper">
+        </div>
+    </div>
+    <div class="right">
+        <div class="right-wrapper">
+
+            <form [formGroup]="logInForm" autocomplete="off">
+                <h2 class="onboarding_title">Login </h2>
+                <div class="common-bottom">
+                    <div class="theme-form-group rel">
+                        <input type="text" class="theme-form-control" formControlName="username"
+                            placeholder="Username" />
+                    </div>
+                    <span *ngIf="logInForm.get('username')?.errors?.['required'] && logInForm.get('username')?.touched"
+                        class="err-msg">Please
+                        enter username</span>
+
+                </div>
+                <div class="common-bottom">
+                    <div class="theme-form-group rel">
+                        <input [type]="passwordShow ? 'text' : 'password'" class="theme-form-control"
+                            formControlName="password" minlength="8" maxlength="18" placeholder="Password" />
+                        <em class="password-checker">
+                            <span (click)="toggleFieldTextType(1)" *ngIf="fieldTextType">hide</span>
+                            <span (click)="toggleFieldTextType(2)" *ngIf="fieldTextType2">show</span>
+                        </em>
+                        <span class="err-msg"
+                            *ngIf="logInForm.controls['password'].hasError('required') && logInForm.get('password')?.touched">
+                            Please enter password.
+                        </span>
+
+                    </div>
+                </div>
+
+
+
+                <div class="theme-btn-group">
+                    <button type="submit" [disabled]="!logInForm.valid" (click)="login()"
+                        class="rounded theme-btn btn-primary">Sign
+                        in</button>
+                </div>
+
+            </form>
+            <div>Welcome to next gen platform Sign in for better user experience</div>
+
+        </div>
+    </div>
+</div>

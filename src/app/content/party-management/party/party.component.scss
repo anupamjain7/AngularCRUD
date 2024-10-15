@@ -1,0 +1,19 @@
+.table-image {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+}
+
+.center-table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  max-width: 1500px;
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+}

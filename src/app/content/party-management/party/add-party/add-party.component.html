@@ -1,0 +1,160 @@
+<div class="container mt-5">
+    <button type="button" class="btn btn-primary" routerLink="/party">Party Data</button>
+    
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+    <h2 class="mt-4">Add Details</h2>
+      <div class="form-group mt-4">
+        <label for="name">Name:</label>
+        <input id="name" type="text" formControlName="name" class="form-control" required>
+         <div>
+          <span *ngIf="createForm.get('name')?.errors?.['required'] && createForm.get('name')?.touched"
+          class="err-msg">Please
+          enter name</span>
+          </div>
+    </div>
+      <div class="form-group">
+        <label for="company_name">Company Name:</label>
+        <input id="companyName" type="text" formControlName="company_name" class="form-control" required>
+        <div>
+            <span *ngIf="createForm.get('company_name')?.errors?.['required'] && createForm.get('company_name')?.touched"
+            class="err-msg">Please
+            enter company name</span>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="mobile_no">Mobile Number:</label>
+        <input id="mobileNumber" type="text" formControlName="mobile_no" class="form-control" required>
+        <div>
+            <span *ngIf="createForm.get('mobile_no')?.errors?.['required'] && createForm.get('mobile_no')?.touched"
+            class="err-msg">Please
+            enter mobile number</span>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="telephone_no">Telephone Number:</label>
+        <input id="telephoneNumber" type="text" formControlName="telephone_no" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="whatsapp_no">Whatsapp Number:</label>
+        <input id="whatsappNumber" type="text" formControlName="whatsapp_no" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" formControlName="email" class="form-control" required>
+        <div>
+            <span *ngIf="createForm.get('email')?.errors?.['required'] && createForm.get('email')?.touched"
+            class="err-msg">Please
+            enter email</span>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="remark">Remark:</label>
+        <textarea id="remark" formControlName="remark" class="form-control"></textarea>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" formControlName="login_access" id="loginAccess">
+        <label class="form-check-label" for="login_access">Login Access</label>
+      </div>
+      <div class="form-group">
+        <label for="date_of_birth">Date of Birth:</label>
+        <input id="dateOfBirth" type="date" formControlName="date_of_birth" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="anniversary_date">Anniversary Date:</label>
+        <input id="anniversaryDate" type="date" formControlName="anniversary_date" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="gstin">GSTIN:</label>
+        <input id="gstin" type="text" formControlName="gstin" class="form-control" required>
+        <div>
+            <span *ngIf="createForm.get('gstin')?.errors?.['required'] && createForm.get('gstin')?.touched"
+            class="err-msg">Please
+            enter GSTIN</span>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="pan_no">PAN Number:</label>
+        <input id="panNumber" type="text" formControlName="pan_no" class="form-control">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" formControlName="apply_tds" id="applyTds">
+        <label class="form-check-label" for="apply_tds">Apply TDS</label>
+      </div>
+      <div class="form-group">
+        <label for="credit_limit">Credit Limit:</label>
+        <input id="creditLimit" type="number" formControlName="credit_limit" class="form-control" required>
+        <div>
+            <span *ngIf="createForm.get('credit_limit')?.errors?.['required'] && createForm.get('credit_limit')?.touched"
+            class="err-msg">Please
+            enter credit limit</span>
+            </div>
+      </div>
+  
+      <!-- Addresses FormArray -->
+      <div formArrayName="address" class="mt-3">
+        <h5>Addresses</h5>
+        <div *ngFor="let addressIndex of address.controls; let i=index" [formGroupName]="i" class="border p-3 mb-2">
+          <div class="form-group">
+            <label for="address_line_1">Address Line 1:</label>
+            <input id="address_line_1" type="text" formControlName="address_line_1" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="address_line_2">Address Line 2:</label>
+            <input id="address_line_2" type="text" formControlName="address_line_2" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="country">Country:</label>
+            <input id="country" type="text" formControlName="country" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="state">State:</label>
+            <input id="state" type="text" formControlName="state" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="city">City:</label>
+            <input id="city" type="text" formControlName="city" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="pincode">Pincode:</label>
+            <input id="pincode" type="text" formControlName="pincode" class="form-control" required>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="removeAddress(i)">Remove Address</button>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addAddress()">Add Address</button>
+      </div>
+  
+      <!-- Banks FormArray -->
+      <div formArrayName="bank" class="mt-3">
+        <h5>Banks</h5>
+        <div *ngFor="let bankIndex of bank.controls; let i=index" [formGroupName]="i" class="border p-3 mb-2">
+          <div class="form-group">
+            <label for="bank_ifsc_code">Bank IFSC Code:</label>
+            <input id="bank_ifsc_code" type="text" formControlName="bank_ifsc_code" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="bank_name">Bank Name:</label>
+            <input id="bank_name" type="text" formControlName="bank_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="branch_name">Branch Name:</label>
+            <input id="branch_name" type="text" formControlName="branch_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="account_no">Account Number:</label>
+            <input id="account_no" type="text" formControlName="account_no" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="account_holder_name">Account Holder Name:</label>
+            <input id="account_holder_name" type="text" formControlName="account_holder_name" class="form-control" required>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="removeBank(i)">Remove Bank</button>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addBank()">Add Bank</button>
+      </div>
+  
+     
+    
+      <button type="submit" [disabled]="createForm.invalid" class="btn btn-success mt-3">{{ role == 2 ? "Update" : "Submit" }}</button>
+    </form>
+  </div>
+  
